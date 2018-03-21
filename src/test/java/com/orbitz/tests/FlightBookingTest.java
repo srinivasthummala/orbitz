@@ -35,7 +35,7 @@ public class FlightBookingTest {
 				driver.manage().window().maximize();
 				System.out.println("chrome browser launched");
 			}else if(browser.equals("firefox")){
-				System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/src/main/resources/drivers/geckodriver19.1.exe");
+				System.setProperty("webdriver.gecko.driver", "C:/Users/srinivas.thummala/Downloads/geckodriver19.exe");
 				driver = new FirefoxDriver();
 				driver.manage().window().maximize();
 				System.out.println("firefox browser launched");
