@@ -5,13 +5,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
@@ -31,12 +31,12 @@ public class FlightBookingTest {
 		try {
 			if(browser.equals("chrome")){
 				System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/drivers/chromedriver.exe");
-				ChromeOptions options = new ChromeOptions();
-				options.addArguments("--disable-infobars");
-				driver = new ChromeDriver(options);
+				driver = new ChromeDriver();
+				System.out.println("chrome browser launched");
 			}else if(browser.equals("firefox")){
 				System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/src/main/resources/drivers/geckodriver.exe");
 				driver = new FirefoxDriver();
+				System.out.println("firefox browser launched");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());	
