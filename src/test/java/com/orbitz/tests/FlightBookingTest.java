@@ -27,7 +27,7 @@ public class FlightBookingTest {
 	
 	@Parameters({"browser"})
 	@BeforeMethod
-	public void browserInitialization(String browser){
+	public void browserInitialization(String browser) throws InterruptedException{
 		try {
 			if(browser.equals("chrome")){
 				System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/drivers/chromedriver.exe");
@@ -41,6 +41,8 @@ public class FlightBookingTest {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());	
 		}
+		
+		Thread.sleep(500);
 		driver.manage().window().maximize();
 		System.out.println("maximized");
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
