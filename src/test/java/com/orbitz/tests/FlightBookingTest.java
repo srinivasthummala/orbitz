@@ -32,18 +32,20 @@ public class FlightBookingTest {
 			if(browser.equals("chrome")){
 				System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/drivers/chromedriver.exe");
 				driver = new ChromeDriver();
+				driver.manage().window().maximize();
 				System.out.println("chrome browser launched");
 			}else if(browser.equals("firefox")){
 				System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/src/main/resources/drivers/geckodriver20.exe");
 				driver = new FirefoxDriver();
+				driver.manage().window().maximize();
 				System.out.println("firefox browser launched");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());	
 		}
 		
-		Thread.sleep(500);
-		driver.manage().window().maximize();
+		//Thread.sleep(500);
+		
 		System.out.println("maximized");
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		//driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
