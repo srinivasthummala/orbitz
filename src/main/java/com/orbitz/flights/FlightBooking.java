@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
@@ -121,19 +120,7 @@ public class FlightBooking {
 		driver.quit();
 	}
 	
-	//Take screenshot 
-	public void takeScreenShot(String screenShotName) {
-		String timeStamp;
-		File sourceFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime()); 
-		try {
-			FileUtils.copyFile(sourceFile,
-					new File(System.getProperty("user.dir") + "/screenshot/" + screenShotName + "_" +timeStamp+ ".png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
+
 	
 
 }
