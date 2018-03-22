@@ -41,6 +41,7 @@ public class FlightBooking {
 	public void enterOriginAs(String name) {
 		String originXpath = "//span[contains(text(), 'Flying from')]/following-sibling::*[starts-with(@id, 'flight-origin')]";
 		WebElement origin = driver.findElement(By.xpath(originXpath));
+		origin.clear();
 		origin.sendKeys(name);
 		String originValueXpath = "//a[contains(@data-value, '" + name + "')]";
 		WebElement originValue = driver.findElement(By.xpath(originValueXpath));
@@ -51,6 +52,7 @@ public class FlightBooking {
 	public void EnterDestinationAs(String name) {
 		String destXpath = "//span[contains(text(), 'Flying to')]/following-sibling::*[starts-with(@id, 'flight-destination')]";
 		WebElement destination = driver.findElement(By.xpath(destXpath));
+		destination.clear();
 		destination.sendKeys(name);
 		WebElement destinationValue = driver.findElement(By.xpath("//a[contains(@data-value, '" + name + "')]"));
 		wait.until(ExpectedConditions.elementToBeClickable(destinationValue)).click();
@@ -60,7 +62,9 @@ public class FlightBooking {
 	public void clickDepart(){
 		String departXpath = "//span[contains(text(), 'Departing')]"
 							 + "/following-sibling::input[starts-with(@id, 'flight-departing')]";
-		driver.findElement(By.xpath(departXpath)).click();
+		WebElement txtDate = driver.findElement(By.xpath(departXpath));
+		txtDate.clear();
+		txtDate.click();
 	}
 	
 	// Select date from calendar
@@ -75,8 +79,10 @@ public class FlightBooking {
 								+ "//td/button[@class='datepicker-cal-date']";
 				List<WebElement> lstDates = driver.findElements(By.xpath(daysXpath));
 				for (WebElement date : lstDates) {
+					
 					if (date.getText().contains(dayValue)) {
-						date.click();
+						((JavascriptExecutor) driver).executeScript("arguments[0].click();", date);
+
 						return;
 					}
 				}

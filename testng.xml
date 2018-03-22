@@ -4,17 +4,18 @@
 	<listeners>
 		<listener class-name="listener.ListenerTestNG"></listener>
 	</listeners>
-	<test thread-count="5" name="Chrome Test">
+
+	<test thread-count="5" name="Edge Test" parallel="true ">
+		<parameter name="browser" value="edge"></parameter>
+		<classes>
+			<class name="com.orbitz.tests.FlightBookingTest" />
+		</classes>
+	</test> 
+	<test thread-count="5" name="Chrome Test" parallel="true">
 		<parameter name="browser" value="chrome"></parameter>
 		<classes>
 			<class name="com.orbitz.tests.FlightBookingTest" />
 		</classes>
 	</test>
-
-	<!-- <test thread-count="5" name="Firefox Test">
-		<parameter name="browser" value="firefox"></parameter>
-		<classes>
-			<class name="com.orbitz.tests.FlightBookingTest" />
-		</classes>
-	</test>  -->
+	
 </suite> <!-- Suite -->

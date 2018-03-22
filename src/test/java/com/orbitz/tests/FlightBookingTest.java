@@ -9,9 +9,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -35,12 +37,9 @@ public class FlightBookingTest {
 				System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/drivers/chromedriver.exe");
 				driver = new ChromeDriver();
 				System.out.println("chrome browser launched");
-			}else if(browser.equals("firefox")){
-				System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/src/main/resources/drivers/geckodriver20.exe");
-				final FirefoxOptions options = new FirefoxOptions();
-				options.addPreference("security.sandbox.content.level", 5);
-				driver = new FirefoxDriver(options);
-				System.out.println("firefox browser launched");
+			}else if(browser.equals("edge")){
+				System.setProperty("webdriver.edge.driver", System.getProperty("user.dir") + "/src/main/resources/drivers/MicrosoftWebDriver.exe");
+				driver = new EdgeDriver();
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());	
@@ -63,7 +62,7 @@ public class FlightBookingTest {
 		flightBook.enterOriginAs("Pune");
 		flightBook.EnterDestinationAs("Tirupati");
 		flightBook.clickDepart();
-		String SelectDate = "04/24/2018";
+		String SelectDate = "03/30/2018";
 		Date d = new Date(SelectDate);
 		SimpleDateFormat dt = new SimpleDateFormat("MMM/dd/yyyy");
 		String date = dt.format(d);
