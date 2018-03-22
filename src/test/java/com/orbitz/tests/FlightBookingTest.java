@@ -40,6 +40,9 @@ public class FlightBookingTest {
 			}else if(browser.equals("edge")){
 				System.setProperty("webdriver.edge.driver", System.getProperty("user.dir") + "/src/main/resources/drivers/MicrosoftWebDriver.exe");
 				driver = new EdgeDriver();
+			}else if(browser.equals("firefox")){
+				System.setProperty("webdriver.edge.driver", System.getProperty("user.dir") + "/src/main/resources/drivers/geckodriver20.exe");
+				driver = new EdgeDriver();
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());	
