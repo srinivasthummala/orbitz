@@ -10,6 +10,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -35,7 +37,9 @@ public class FlightBookingTest {
 				System.out.println("chrome browser launched");
 			}else if(browser.equals("firefox")){
 				System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/src/main/resources/drivers/geckodriver20.exe");
-				driver = new FirefoxDriver();
+				final FirefoxOptions options = new FirefoxOptions();
+				options.addPreference("security.sandbox.content.level", 5);
+				driver = new FirefoxDriver(options);
 				System.out.println("firefox browser launched");
 			}
 		} catch (Exception e) {
