@@ -75,7 +75,7 @@ public class FlightBookingTest {
 		flightBook.selectDepartDate(txtMont_year, txtDay);
 		flightBook.clickSearchButton();
 		List<WebElement> availableFlights = flightBook.listOfFlights();
-		Assert.assertTrue(availableFlights.size()>=2);
+		Assert.assertTrue(availableFlights.size()>=2, "listed flights  are lesser than expected");
 		System.out.println(availableFlights.size());
 	}
 	
