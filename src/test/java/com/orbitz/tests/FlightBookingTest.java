@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -37,33 +38,29 @@ public class FlightBookingTest {
 				System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/drivers/chromedriver.exe");
 				driver = new ChromeDriver();
 				System.out.println("chrome browser launched");
-			}else if(browser.equals("edge")){
-				System.setProperty("webdriver.edge.driver", System.getProperty("user.dir") + "/src/main/resources/drivers/MicrosoftWebDriver.exe");
-				driver = new EdgeDriver();
 			}else if(browser.equals("firefox")){
 				System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/src/main/resources/drivers/geckodriver20.exe");
 				driver = new FirefoxDriver();
+				System.out.println("firefox browser launched");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());	
 		}
-		
-		//Thread.sleep(500);
 		driver.manage().window().maximize();
-		System.out.println("maximized");
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		driver.get("https://www.orbitz.com/");
 		flightBook = new FlightBooking(driver);
-
 	}
 	
 	@Test
 	public void validateSearchedFlightDetails(){
+		String source = "PNQ";
+		String destination = "TIR";
 		flightBook.clickFlightsFromMenu();
 		flightBook.selectTripType();
-		flightBook.enterOriginAs("Pune");
-		flightBook.EnterDestinationAs("Tirupati");
+		flightBook.enterOriginAs(source);
+		flightBook.EnterDestinationAs(destination);
 		flightBook.clickDepart();
 		String SelectDate = "03/30/2018";
 		Date d = new Date(SelectDate);
@@ -75,7 +72,20 @@ public class FlightBookingTest {
 		flightBook.selectDepartDate(txtMont_year, txtDay);
 		flightBook.clickSearchButton();
 		List<WebElement> availableFlights = flightBook.listOfFlights();
-		Assert.assertTrue(availableFlights.size()>=2, "listed flights  are lesser than expected");
+		if(availableFlights.size()>0){
+			for(int i=0; i<availableFlights.size(); i++ ){
+				if(i<3){
+					WebElement ele = availableFlights.get(i);
+					String flightDetails = ele.getText();
+					Assert.assertTrue(flightDetails.contains(source) && flightDetails.contains(destination));
+				}else{
+					break;
+				}
+			}
+		}else{
+			System.out.println("Couldn't find any flights in this route");
+		}
+		
 		System.out.println(availableFlights.size());
 	}
 	

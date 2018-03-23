@@ -120,11 +120,11 @@ public class FlightBooking {
 
 	// find and return list of flights available
 	public List<WebElement> listOfFlights() {
-		List<WebElement> flightsList = driver
-				.findElements(By.xpath("//div[@id='flight-listing-container']/ul/li/h3/.."));
+		String elePath = "//div[@class='secondary-content no-wrap']";
+		List<WebElement> flightsList = driver.findElements(By.xpath(elePath));
 		return flightsList;
 	}
-	
+		
 	//check element is clickable or not
 	public static boolean isClickable(WebElement webe) {
 		try {
