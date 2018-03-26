@@ -86,7 +86,6 @@ public class FlightBookingTest {
 	@AfterMethod
 	public void quitBrowser(){
 		driver.quit();
-		System.out.println("browser closed");
 	}
 
 }
