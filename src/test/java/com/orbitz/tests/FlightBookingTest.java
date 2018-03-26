@@ -73,20 +73,14 @@ public class FlightBookingTest {
 		flightBook.clickSearchButton();
 		List<WebElement> availableFlights = flightBook.listOfFlights();
 		if(availableFlights.size()>0){
-			for(int i=0; i<availableFlights.size(); i++ ){
-				if(i<3){
+			for(int i=0; i<3; i++ ){	
 					WebElement ele = availableFlights.get(i);
 					String flightDetails = ele.getText();
 					Assert.assertTrue(flightDetails.contains(source) && flightDetails.contains(destination));
-				}else{
-					break;
-				}
 			}
 		}else{
 			System.out.println("Couldn't find any flights in this route");
 		}
-		
-		System.out.println(availableFlights.size());
 	}
 	
 	@AfterMethod
